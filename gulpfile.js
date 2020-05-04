@@ -139,8 +139,8 @@ const script = () => {
         .pipe(babel())
         // JavaScript Lint
         .pipe(jshint())
-        .pipe( remove_logging({ namespace: ['console', 'window.console', 'alert']  }) )
-        .pipe( strip() )
+        .pipe( gulpif(PRODUCTION === true, remove_logging({ namespace: ['console', 'window.console', 'alert']  }) ))
+        .pipe( gulpif(PRODUCTION === true, strip() ))
         .pipe( gulpif(PRODUCTION === true, stripDebug() ))
         // Report of jslint
         .pipe(jshint.reporter('jshint-stylish'))

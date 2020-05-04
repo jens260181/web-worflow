@@ -6,6 +6,8 @@ const browserSync = require('browser-sync').create();
 const gutil = require('gulp-util');
 const sourcemaps = require('gulp-sourcemaps');
 const gulpif = require('gulp-if');
+const del = require('del');
+const vinylPaths = require('vinyl-paths');
 // SCSS
 const sass = require('gulp-sass');
 const postcss = require("gulp-postcss");
@@ -31,7 +33,7 @@ const strip = require('gulp-strip-comments');
 const stripDebug = require('gulp-strip-debug');
 
 // Settings/Einstellungen
-const PRODUCTION = true;
+const PRODUCTION = false;
 const IMAGE_QUALITY = 80;
 
 // Konstanten
@@ -56,6 +58,12 @@ const serve = (done) => {
     });
     done();
 };
+
+const cleanup = () => {
+    return gulp.src(`${DIST}/*`)
+        .pipe(vinylPaths(del))
+        .pipe(gulp.dest(`${DIST}`));
+}
 
 const images = () => {
     return gulp.src(`${ASSETS}/images/**/*`)
@@ -164,10 +172,10 @@ const script = () => {
 const watch = () => gulp.watch([`${ASSETS}/images/**/*`, `${SRC}/*.html`, `${ASSETS}/js/**/*.js`, `${ASSETS}/scss/**/*.scss`], gulp.series(images, css, script, html, reload));
 
 // All Tasks for this Project
-const dev = gulp.series(images, css, script, html, serve, watch);
+const dev = gulp.series(cleanup, images, css, script, html, serve, watch);
 
 // Just Build the Project
-const build = gulp.series(images, css, script, html);
+const build = gulp.series(cleanup ,images, css, script, html);
 
 // Default function (used when type gulp)
 exports.dev = dev;

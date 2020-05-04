@@ -20,6 +20,7 @@ Neuer Workflow für Webprojekte (HTML, CSS, JavaScript).
 Aktuell sind nur Basis Einstellungen möglich:
 
 *  `PRODUCTION` `true` oder `false`
+*  `IMAGE_QUALITY` `0` bis `100`
 *  `SRC` Hauptordner, wo die Source Dateien liegen (HTML)
 *  `ASSETS` Ordner für SCSS/SASS, JS, Images, ...
 *  `DIST_STAGE` Ordner für die Ausgabe der Testumgebung
@@ -36,7 +37,6 @@ Aktuell sind nur Basis Einstellungen möglich:
 
 ## ToDo
 
-* [ ]  Task für Bildoptimierung
 * [ ]  Task für JSON Minifizierung
 * [ ]  Bootstrap als Dependency
 * [ ]  Bootstrap als SCSS Module bereitstellen

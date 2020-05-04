@@ -54,6 +54,7 @@
         "gulp-sourcemaps": "^2.6.5",
         "gulp-uglify": "^3.0.2",
         "gulp-util": "^3.0.8",
+        "imagemin-mozjpeg": "^8.0.0",
         "imagemin-pngquant": "^8.0.0",
         "jshint": "^2.11.0",
         "rename": "^1.0.4"

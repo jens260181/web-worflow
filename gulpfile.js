@@ -18,6 +18,7 @@ const jsonmin = require('gulp-jsonminify');
 // Images
 const imagemin = require('gulp-imagemin');
 const pngquant = require('imagemin-pngquant');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 // JavaScript/ES6
 const browserify = require('gulp-browserify');
 const babel = require('gulp-babel');
@@ -26,6 +27,7 @@ const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
 // Settings/Einstellungen
 const PRODUCTION = false;
+const IMAGE_QUALITY = 80;
 // Konstanten
 const SRC           = './src';
 const ASSETS        = './src/assets';
@@ -48,6 +50,22 @@ const serve = (done) => {
     });
     done();
 };
+
+const images = () => {
+    return gulp.src(`${ASSETS}/images/**/*`)
+    .pipe(imagemin([
+	   imagemin.gifsicle({interlaced: true}),
+	   imageminMozjpeg({progressive: true, quality: IMAGE_QUALITY}),
+	   pngquant({quality: IMAGE_QUALITY}),
+	   imagemin.svgo({
+		   plugins: [
+			   {removeViewBox: true},
+			   {cleanupIDs: false}
+		   ]
+	   })
+	]))
+    .pipe(gulp.dest(`${DIST}/assets/images`))
+}
 
 const css = () => {
     return gulp.src(`${ASSETS}/scss/**/*.scss`)
@@ -134,13 +152,13 @@ const script = () => {
 };
 
 // Function to watch our Changes and refreash page
-const watch = () => gulp.watch([`${SRC}/*.html`, `${ASSETS}/js/**/*.js`, `${ASSETS}/scss/**/*.scss`], gulp.series(css, script, html, reload));
+const watch = () => gulp.watch([`${ASSETS}/images/**/*`, `${SRC}/*.html`, `${ASSETS}/js/**/*.js`, `${ASSETS}/scss/**/*.scss`], gulp.series(images, css, script, html, reload));
 
 // All Tasks for this Project
-const dev = gulp.series(css, script, html, serve, watch);
+const dev = gulp.series(images, css, script, html, serve, watch);
 
 // Just Build the Project
-const build = gulp.series(css, script, html);
+const build = gulp.series(images, css, script, html);
 
 // Default function (used when type gulp)
 exports.dev = dev;

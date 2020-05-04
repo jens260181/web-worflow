@@ -39,6 +39,7 @@ const IMAGE_QUALITY = 80;
 // Konstanten
 const SRC           = './src';
 const ASSETS        = './src/assets';
+const ASSETS_BS     = 'src/assets/scss/bootstrap';
 const DIST_STAGE    = './dist/staging';
 const DIST_PROD     = './dist/production';
 const DIST          = (PRODUCTION) ? DIST_PROD : DIST_STAGE;
@@ -90,6 +91,7 @@ const css = () => {
             options: {
                 formatter: 'stylish',
             },
+            files: {ignore: ASSETS_BS + '/**/*.scss'},
             rules: {
                 'no-ids': 1,
                 'final-newline': 0,

@@ -1,0 +1,16 @@
+@import 'variablen';
+
+body,
+html {
+    background-color: $color-red;
+    font-family: 'Roboto';
+    font-size: $base-font-size;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}

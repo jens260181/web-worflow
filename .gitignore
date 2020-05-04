@@ -1,0 +1,16 @@
+/.sass-cache
+/node_modules
+/dist
+Thumbs.db
+/_trash
+.git
+CVS
+.svn
+.*.swp
+.DS_Store
+!_*.scss
+npm-debug.log
+.npmrc
+node_modules
+config.gypi
+*.orig

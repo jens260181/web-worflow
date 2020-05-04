@@ -38,6 +38,3 @@ Aktuell sind nur Basis Einstellungen möglich:
 ## ToDo
 
 * [ ]  Task für JSON Minifizierung
-* [ ]  Bootstrap als Dependency
-* [ ]  Bootstrap als SCSS Module bereitstellen
-* [ ]  gulp-clean-old als Dependency

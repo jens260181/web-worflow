@@ -5,6 +5,7 @@ const rename = require("gulp-rename");
 const browserSync = require('browser-sync').create();
 const gutil = require('gulp-util');
 const sourcemaps = require('gulp-sourcemaps');
+const gulpif = require('gulp-if');
 // SCSS
 const sass = require('gulp-sass');
 const postcss = require("gulp-postcss");
@@ -25,9 +26,14 @@ const babel = require('gulp-babel');
 const jshint = require('gulp-jshint');
 const uglify = require('gulp-uglify');
 const concat = require('gulp-concat');
+const remove_logging  = require("gulp-remove-logging");
+const strip = require('gulp-strip-comments');
+const stripDebug = require('gulp-strip-debug');
+
 // Settings/Einstellungen
-const PRODUCTION = false;
+const PRODUCTION = true;
 const IMAGE_QUALITY = 80;
+
 // Konstanten
 const SRC           = './src';
 const ASSETS        = './src/assets';
@@ -133,6 +139,9 @@ const script = () => {
         .pipe(babel())
         // JavaScript Lint
         .pipe(jshint())
+        .pipe( remove_logging({ namespace: ['console', 'window.console', 'alert']  }) )
+        .pipe( strip() )
+        .pipe( gulpif(PRODUCTION === true, stripDebug() ))
         // Report of jslint
         .pipe(jshint.reporter('jshint-stylish'))
         // Add browser Support
@@ -140,7 +149,7 @@ const script = () => {
             insertGlobals: true
         }))
         // Minify
-        .pipe(uglify())
+        // .pipe(uglify()) // Unable to minify !?!?!?!
         // add SUffix
         .pipe(rename({ basename: 'main', suffix: ".min" }))
         // Write Sourcemap

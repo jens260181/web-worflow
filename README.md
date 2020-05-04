@@ -40,6 +40,4 @@ Aktuell sind nur Basis Einstellungen möglich:
 * [ ]  Task für JSON Minifizierung
 * [ ]  Bootstrap als Dependency
 * [ ]  Bootstrap als SCSS Module bereitstellen
-* [ ]  remove_logging als Dependency
-* [ ]  remove_logging als Dependency
 * [ ]  gulp-clean-old als Dependency

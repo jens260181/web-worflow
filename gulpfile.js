@@ -35,14 +35,17 @@ const stripDebug = require('gulp-strip-debug');
 // Settings/Einstellungen
 const PRODUCTION = false;
 const IMAGE_QUALITY = 80;
+const ENABLE_JSON = true;
 
 // Konstanten
 const SRC           = './src';
 const ASSETS        = './src/assets';
 const ASSETS_BS     = 'src/assets/scss/bootstrap';
+const ASSETS_JSON   = ['./src/assets/data/json/**/*.json'];
 const DIST_STAGE    = './dist/staging';
 const DIST_PROD     = './dist/production';
 const DIST          = (PRODUCTION) ? DIST_PROD : DIST_STAGE;
+const DIST_JSON     = DIST + '/assets/data/json';
 
 // Browser Refresh
 const reload = (done) => {
@@ -80,6 +83,13 @@ const images = () => {
 	   })
 	]))
     .pipe(gulp.dest(`${DIST}/assets/images`))
+}
+
+const json = () => {
+    if (!ENABLE_JSON) return;
+    return gulp.src(ASSETS_JSON)
+        .pipe(jsonmin())
+        .pipe(gulp.dest(DIST_JSON));
 }
 
 const css = () => {
@@ -171,13 +181,13 @@ const script = () => {
 };
 
 // Function to watch our Changes and refreash page
-const watch = () => gulp.watch([`${ASSETS}/images/**/*`, `${SRC}/*.html`, `${ASSETS}/js/**/*.js`, `${ASSETS}/scss/**/*.scss`], gulp.series(images, css, script, html, reload));
+const watch = () => gulp.watch([`${ASSETS}/images/**/*`, `${SRC}/*.html`, `${ASSETS}/js/**/*.js`, `${ASSETS}/scss/**/*.scss`, `${ASSETS_JSON}`], gulp.series(images, json, css, script, html, reload));
 
 // All Tasks for this Project
-const dev = gulp.series(cleanup, images, css, script, html, serve, watch);
+const dev = gulp.series(cleanup, images, json, css, script, html, serve, watch);
 
 // Just Build the Project
-const build = gulp.series(cleanup ,images, css, script, html);
+const build = gulp.series(cleanup ,images, json, css, script, html);
 
 // Default function (used when type gulp)
 exports.dev = dev;

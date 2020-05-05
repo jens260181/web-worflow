@@ -2,6 +2,15 @@
 
 Neuer Workflow für Webprojekte (HTML, CSS, JavaScript).
 
+## Features
+
+*  SASS/CSCSS zu CSS
+*  ES6 zu JavaScript
+*  jp(e)g, png, svg Grafiken optimieren
+*  JSON Dateien minimieren
+*  HTML cleanup, minimieren, optimieren
+*  Browser Reload
+
 ## Requirements
 
 *  NodeJS 12.13.0
@@ -37,4 +46,6 @@ Aktuell sind nur Basis Einstellungen möglich:
 
 ## ToDo
 
-* [ ]  Task für JSON Minifizierung
+* [ ]  TypeScript Compiler
+* [ ]  Modulare Features
+* [ ]  Cachebuster (CSS, JS)

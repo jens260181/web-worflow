@@ -8,7 +8,7 @@ Neuer Workflow für Webprojekte (HTML, CSS, JavaScript).
 *  ES6 zu JavaScript
 *  jp(e)g, png, svg Grafiken optimieren
 *  JSON Dateien minimieren
-*  HTML cleanup, minimieren, optimieren
+*  HTML cleanup, minimieren, optimieren, Cachebusting
 *  Browser Reload
 
 ## Requirements
@@ -51,4 +51,3 @@ Aktuell sind nur Basis Einstellungen möglich:
 
 * [ ]  TypeScript Compiler
 * [ ]  Modulare Features
-* [ ]  Cachebuster (CSS, JS)

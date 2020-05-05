@@ -8,6 +8,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const gulpif = require('gulp-if');
 const del = require('del');
 const vinylPaths = require('vinyl-paths');
+const cachebust = require('gulp-cache-bust');
 // SCSS
 const sass = require('gulp-sass');
 const postcss = require("gulp-postcss");
@@ -144,6 +145,8 @@ const html = () => {
             sortAttributes: true,
             sortClassName: true
         }))
+        // Cachebusting
+        .pipe(cachebust({type: 'timestamp'}))
         // Ausgabe
         .pipe(gulp.dest(`${DIST}`));
 };

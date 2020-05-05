@@ -30,11 +30,14 @@ Aktuell sind nur Basis Einstellungen möglich:
 
 *  `PRODUCTION` `true` oder `false`
 *  `IMAGE_QUALITY` `0` bis `100`
+*  `ENABLE_JSON` `true` oder `false`
 *  `SRC` Hauptordner, wo die Source Dateien liegen (HTML)
 *  `ASSETS` Ordner für SCSS/SASS, JS, Images, ...
+*  `ASSETS_JSON` Ordner für JSON Dateien
 *  `DIST_STAGE` Ordner für die Ausgabe der Testumgebung
 *  `DIST_PROD` Ordner für die Ausgabe der Live Version
 *  `DIST` Verweist auf Stage oder Production (Muss nicht angepasst werden)
+*  `DIST_JSON` Ordner für Speicherung der minifizierten JSON Dateien
 
 ## Usage
 

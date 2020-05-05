@@ -35,7 +35,7 @@ const stripDebug = require('gulp-strip-debug');
 // Settings/Einstellungen
 const PRODUCTION = false;
 const IMAGE_QUALITY = 80;
-const ENABLE_JSON = true;
+const ENABLE_JSON = false;
 
 // Konstanten
 const SRC           = './src';
@@ -85,11 +85,14 @@ const images = () => {
     .pipe(gulp.dest(`${DIST}/assets/images`))
 }
 
-const json = () => {
-    if (!ENABLE_JSON) return;
-    return gulp.src(ASSETS_JSON)
-        .pipe(jsonmin())
-        .pipe(gulp.dest(DIST_JSON));
+const json = (done) => {
+    if (!ENABLE_JSON) {
+        done();
+    }  else {
+        return gulp.src(ASSETS_JSON)
+            .pipe(jsonmin())
+            .pipe(gulp.dest(DIST_JSON));
+    }
 }
 
 const css = () => {

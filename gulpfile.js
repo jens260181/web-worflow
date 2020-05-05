@@ -70,6 +70,11 @@ const cleanup = () => {
         .pipe(gulp.dest(`${DIST}`));
 }
 
+const copystatic = () => {
+    return gulp.src(`${SRC}/static/**/*`)
+	.pipe(gulp.dest(`${DIST}/assets`))
+}
+
 const images = () => {
     return gulp.src(`${ASSETS}/images/**/*`)
     .pipe(imagemin([
@@ -190,12 +195,15 @@ const script = () => {
 const watch = () => gulp.watch([`${ASSETS}/images/**/*`, `${SRC}/*.html`, `${ASSETS}/js/**/*.js`, `${ASSETS}/scss/**/*.scss`, `${ASSETS_JSON}`], gulp.series(images, json, css, script, html, reload));
 
 // All Tasks for this Project
-const dev = gulp.series(cleanup, images, json, css, script, html, serve, watch);
+const dev = gulp.series(cleanup, copystatic, images, json, css, script, html, serve, watch);
 
 // Just Build the Project
-const build = gulp.series(cleanup ,images, json, css, script, html);
+const build = gulp.series(cleanup, copystatic, images, json, css, script, html);
 
+// Just copy Fstatic files
+const copy = gulp.series(copystatic);
 // Default function (used when type gulp)
+exports.copy = copy;
 exports.dev = dev;
 exports.build = build;
 exports.default = build;
